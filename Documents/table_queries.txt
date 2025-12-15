@@ -1,5 +1,7 @@
 DROP DATABASE Project_quizapp_db; // delete database
 
+SHOW DATABASES;
+
 CREATE DATABASE Project_quizapp_db;
 
 USE Project_quizapp_db;
@@ -8,7 +10,7 @@ CREATE TABLE quizzes (
 	quiz_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	title VARCHAR(255),
 	creator_id INT,
-	created_at TIMESTAMP	
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 DESC quizzes;
@@ -19,7 +21,7 @@ CREATE TABLE users (
 	email VARCHAR(150),
 	password_hash VARCHAR(255),
 	role ENUM('User','Admin') DEFAULT 'User',
-	created_at TIMESTAMP	
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP	
 );
 
 DESC users;
@@ -30,7 +32,7 @@ CREATE TABLE quiz_attempts (
 	user_id INT, FOREIGN KEY(user_id) REFERENCES users(user_id),
 	final_score INT,
 	total_questions INT,
-	created_at TIMESTAMP	
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
 );
 
 DESC quiz_attempts;
@@ -44,9 +46,15 @@ CREATE TABLE questions (
 	option_c VARCHAR(500),
 	option_d VARCHAR(500),
 	correct_option CHAR(1),
-	created_at TIMESTAMP	
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 DESC questions;
 
 SHOW TABLES;
+
+INSERT INTO users (user_id, name, email, password_hash, role) VALUES (1, 'Samay', 'samay123@email.com', '123', 'Admin');
+
+INSERT INTO users (name, email, password_hash, role) VALUES ('Rohit', 'rohit456@email.com', '456', 'Admin');
+
+SELECT * FROM users;
